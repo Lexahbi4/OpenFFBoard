@@ -14,6 +14,8 @@
 
 ClassIdentifier FFBoardMain::info ={.name = "Basic" ,.id=0};
 
+char FFBoardMain::cdcbuf[64];
+
 
 
 FFBoardMain::FFBoardMain() : CommandHandler(CMDCLSTR_MAIN,CMDCLSID_MAIN,0), commandThread(std::make_unique<FFBoardMainCommandThread>(this)){
@@ -25,12 +27,23 @@ const ClassIdentifier FFBoardMain::getInfo(){
 }
 
 /**
- * Called by the CDC serial port when data is received
+ * Called when data is received on the CDC port
  */
 void FFBoardMain::cdcRcv(char* Buf, uint32_t *Len){
 
 	cdcCmdInterface->addBuf(Buf, Len);
 }
+
+/**
+ * Called by the CDC serial port when data is ready
+ */
+void FFBoardMain::cdcRcvReady(uint8_t itf){
+
+	uint32_t bufferFree = std::min<uint32_t>(cdcCmdInterface->bufferCapacity(),sizeof(this->cdcbuf));
+	uint32_t count = tud_cdc_n_read(itf,this->cdcbuf, bufferFree);
+	this->cdcRcv(this->cdcbuf,&count);
+}
+
 
 
 CommandStatus FFBoardMain::command(const ParsedCommand& cmd,std::vector<CommandReply>& replies){
