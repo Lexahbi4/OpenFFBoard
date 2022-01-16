@@ -895,7 +895,7 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef* htim)
     PE13     ------> TIM1_CH3
     PE14     ------> TIM1_CH4
     */
-    GPIO_InitStruct.Pin = PWM1_Pin|PWM2_Pin|PWM3_Pin|PWM4_Pin;
+    GPIO_InitStruct.Pin = PWM1_Pin|PWM3_Pin|PWM2_Pin|PWM4_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
@@ -1052,6 +1052,8 @@ void HAL_TIM_IC_MspDeInit(TIM_HandleTypeDef* htim_ic)
     */
     HAL_GPIO_DeInit(GP6_GPIO_Port, GP6_Pin);
 
+    /* TIM3 interrupt DeInit */
+    HAL_NVIC_DisableIRQ(TIM3_IRQn);
   /* USER CODE BEGIN TIM3_MspDeInit 1 */
 
   /* USER CODE END TIM3_MspDeInit 1 */

@@ -114,12 +114,12 @@ void RebootDFU();
 #define PWM1_GPIO_Port GPIOE
 #define DRV_BRAKE_Pin GPIO_PIN_10
 #define DRV_BRAKE_GPIO_Port GPIOE
-#define PWM2_Pin GPIO_PIN_11
-#define PWM2_GPIO_Port GPIOE
+#define PWM3_Pin GPIO_PIN_11
+#define PWM3_GPIO_Port GPIOE
 #define DRV_GP1_Pin GPIO_PIN_12
 #define DRV_GP1_GPIO_Port GPIOE
-#define PWM3_Pin GPIO_PIN_13
-#define PWM3_GPIO_Port GPIOE
+#define PWM2_Pin GPIO_PIN_13
+#define PWM2_GPIO_Port GPIOE
 #define PWM4_Pin GPIO_PIN_14
 #define PWM4_GPIO_Port GPIOE
 #define GP7_Pin GPIO_PIN_10
